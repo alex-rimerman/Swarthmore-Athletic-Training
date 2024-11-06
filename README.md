@@ -4,3 +4,4 @@ Before starting, make sure to run `pip install -r requirements.txt` from the roo
 # Our Notes
 * notes about what to do if error comes up "No module named 'flask' "
   * may need to switch interpreters/set up proper interpreters (figure out later)
+  * talked about at beginning of video, would happen when running `pip install -r requirements`
