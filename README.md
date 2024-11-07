@@ -42,7 +42,7 @@ We are always welcome to new contributions from all experience levels. Feel free
 requests, or feel free to fork the project and add your own features, go for it.
 
 ## Warning
-Do **NOT** use this code in production. Website and database management are not secure. 
+**Do NOT use this code in production.** Website and database management are not secure. 
 This is a prototype for what training room software *could* look like, not a final 
 product.
 
