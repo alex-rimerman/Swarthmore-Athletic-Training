@@ -52,4 +52,4 @@ This project was started as a final project for Professor Chris Murphy's
 course at Swarthmore College. Many thanks to [Tim Ruscica](https://github.com/techwithtim)
 for allowing us to use his code as a base structure to our project, specifically the login 
 and database management features 
-( [YouTube tutoial here](https://www.youtube.com/watch?app=desktop&v=dam0GPOAvVI) ).
+([YouTube tutoial here](https://www.youtube.com/watch?app=desktop&v=dam0GPOAvVI)).
