@@ -10,9 +10,9 @@ Our tool serves two purposes:
 design, and simple database management.
 
 ## Original Authors
-- Eddie Paquette ( [eddiep12](https://github.com/eddiep12) )
-- Zachary Potthoff ( [zpotthoff](https://github.com/zpotthoff) )
-- Alex Rimerman ( [alex-rimerman](https://github.com/alex-rimerman) )
+- Eddie Paquette ([eddiep12](https://github.com/eddiep12))
+- Zachary Potthoff ([zpotthoff](https://github.com/zpotthoff))
+- Alex Rimerman ([alex-rimerman](https://github.com/alex-rimerman))
 
 ## Setup
 Before starting, do the following:
