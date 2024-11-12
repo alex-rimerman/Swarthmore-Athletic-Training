@@ -1,7 +1,7 @@
 # Because we have __init__.py in website folder, we can import create_app 
 # function from website folder because website is now a package.
 
-from website import create_app
+from website import create_app #runs everything in init.py file
 
 app = create_app()
 
