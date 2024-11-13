@@ -8,4 +8,4 @@ views = Blueprint('views', __name__)
 # define a route for home page
 @views.route('/') # defines url to where this next function takes us (function runs when we go to this url)
 def home():
-    return render_template("login.html") #renders the html inside of home.html
+    return render_template("home.html") #renders the html inside of home.html
