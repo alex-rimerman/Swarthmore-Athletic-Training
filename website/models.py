@@ -14,4 +14,5 @@ class User(db.Model, UserMixin): #defines layout for objects
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
     last_name = db.Column(db.String(150))
+    role = db.Column(db.String(150))
     notes = db.relationship('Note') 

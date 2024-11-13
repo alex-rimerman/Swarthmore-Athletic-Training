@@ -22,7 +22,10 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('views.home')) #redirects the user to the home page after they sign in
+                if (user.role == "trainer"):
+                    return redirect(url_for('views.trainerHome'))
+                else:
+                    return redirect(url_for('views.home')) #redirects the user to the home page after they sign in
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
@@ -44,6 +47,7 @@ def sign_up():
         last_name = request.form.get('lastName')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
+        role = request.form.get('role')
 
         user = User.query.filter_by(email=email).first()
         
@@ -60,14 +64,19 @@ def sign_up():
             flash('Passwords don\'t match', category='error')
         elif len(password1) < 7:
             flash('Password must be greater than 6 character', category='error')
+        elif len(role) < 1:
+            flash('Role is incorrectly inputted', category='error')
         else:
             # add user to DB  
             new_user = User(email=email, first_name=first_name, last_name=last_name,
-                            password=generate_password_hash(password1, method='pbkdf2:sha256'))
+                            password=generate_password_hash(password1, method='pbkdf2:sha256'), role = role)
             db.session.add(new_user) #adds user to database
             db.session.commit() #updates the database
             login_user(new_user, remember=True)
             flash('Account created!', category='success') #flashes a success message on the screen
-            return redirect(url_for('views.home'))
+            if (role == "trainer"):
+                return redirect(url_for('views.trainerHome'))
+            else:
+                return redirect(url_for('views.home'))
             
     return render_template("sign_up.html", user=current_user)

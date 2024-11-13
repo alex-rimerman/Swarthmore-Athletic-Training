@@ -27,6 +27,11 @@ def home():
 
     return render_template("home.html", user=current_user) #renders the html inside of home.html
 
+@views.route('/trainerHome', methods=['GET', 'POST']) # defines url to where this next function takes us (function runs when we go to this url)
+@login_required
+def trainerHome():
+    return render_template("trainerHome.html", user=current_user) #renders the html inside of trainerHome.html
+
 @views.route('/delete-note', methods=['POST'])
 def delete_note():
     note = json.loads(request.data)
