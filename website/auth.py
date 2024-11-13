@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash #secures the password
 from . import db
+from flask_login import login_user, login_required, logout_user, current_user
 
 # define a blueprint for views
 # means we have a collection of routes/urls that are related to each other
@@ -20,17 +21,20 @@ def login():
         if user: # if we found a user
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
+                login_user(user, remember=True)
                 return redirect(url_for('views.home')) #redirects the user to the home page after they sign in
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
             flash('Email does not exist.', category='error')
 
-    return render_template("login.html")
+    return render_template("login.html", user=current_user)
 
 @auth.route('/logout') # defines url for where to logout
+@login_required
 def logout():
-    return "<p>Logout</p>"
+    logout_user()
+    return redirect(url_for('auth.login'))
 
 @auth.route('/sign-up', methods=['GET', 'POST']) # defines url for where to sign up
 def sign_up():
@@ -62,7 +66,8 @@ def sign_up():
                             password=generate_password_hash(password1, method='pbkdf2:sha256'))
             db.session.add(new_user) #adds user to database
             db.session.commit() #updates the database
+            login_user(user, remember=True)
             flash('Account created!', category='success') #flashes a success message on the screen
             return redirect(url_for('views.home'))  
             
-    return render_template("sign_up.html")
+    return render_template("sign_up.html", user=current_user)
