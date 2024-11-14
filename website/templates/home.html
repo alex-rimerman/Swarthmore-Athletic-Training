@@ -15,7 +15,7 @@
     <h1>Report your injury</h1> 
     <ul class="list-group list-group-flush" id="notes">
         {% for note in user.notes %}
-        <li class="list-group-item" style="color: black;">{{ note.data }}
+        <li class="list-group-item" style="color: black;">{{ note.data }}, {{ note.date.strftime("%B %d, %Y %I:%M %p") }}
             <button type="button" class="close" onClick="deleteNote({{ note.id }})">
                 <span aria-hidden="true">&times;</span>
             </button>
