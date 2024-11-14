@@ -41,7 +41,15 @@ def home():
 @views.route('/trainerHome', methods=['GET', 'POST']) # defines url to where this next function takes us (function runs when we go to this url)
 @login_required
 def trainerHome():
-    return render_template("trainerHome.html", user=current_user) #renders the html inside of trainerHome.html
+    notes = Note.query.all()
+    est = pytz.timezone('US/Eastern')
+    for note in notes:
+        if note.date.tzinfo is None:
+            # Make the datetime object timezone-aware
+            note.date = pytz.utc.localize(note.date)
+        # Convert to EST
+        note.date = note.date.astimezone(est)
+    return render_template("trainerHome.html", user=current_user, notes=notes) #renders the html inside of trainerHome.html
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():
