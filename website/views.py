@@ -3,6 +3,8 @@ from flask_login import login_required, current_user
 from .models import Note
 from . import db
 import json
+import pytz
+from datetime import datetime
 
 
 # define a blueprint for views
@@ -24,6 +26,15 @@ def home():
             db.session.add(new_note)
             db.session.commit()
             flash('Injury added!', category='success')
+    
+    est = pytz.timezone('US/Eastern')
+    for note in current_user.notes:
+        if note.date.tzinfo is None:
+            # Make the datetime object timezone-aware
+            note.date = pytz.utc.localize(note.date)
+        # Convert to EST
+        note.date = note.date.astimezone(est)
+
 
     return render_template("home.html", user=current_user) #renders the html inside of home.html
 
