@@ -1,24 +1,26 @@
-{% extends "base.html" %} {% block title  %}Trainer Home{% endblock%}
-{% block content %}
-<style> body {
+{% extends "base.html" %} {% block title %}Trainer Home{% endblock%} {% block
+content %}
+<style>
+  body {
     background: brown;
     color: white;
-}
+  }
 </style>
-<br>
-<br>
-<div style="text-align: center;">
-    <h1>Welcome Trainer {{ user.first_name }} to the Injury Report Portal</h1> 
-  </div>
+<br />
+<br />
+<div style="text-align: center">
+  <h1>Welcome Trainer {{ user.first_name }} to the Injury Report Portal</h1>
+</div>
 
-  <div style="text-align: center;">
-    <h1>See All Your Athletes' Injuries Below: </h1> 
-    <ul class="list-group list-group-flush" id="notes">
-        {% for note in notes %}
-        <li class="list-group-item" style="color: black;">{{ note.data }}, {{ note.date.strftime("%B %d, %Y %I:%M %p") }}
-        </li>
-        {% endfor %}
-    </ul>
-  </div>
+<div style="text-align: center">
+  <h1>See All Your Athletes' Injuries Below:</h1>
+  <ul class="list-group list-group-flush" id="notes">
+    {% for note in notes %}
+    <li class="list-group-item" style="color: black">
+      {{ note.data }}, {{ note.date.strftime("%B %d, %Y %I:%M %p") }}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
 
 {% endblock %}

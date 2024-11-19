@@ -1,37 +1,38 @@
-{% extends "base.html" %} {% block title  %}Home{% endblock%}
-{% block content %}
-<style> body {
+{% extends "base.html" %} {% block title %}Home{% endblock%} {% block content %}
+<style>
+  body {
     background: brown;
     color: white;
-}
+  }
 </style>
-<br>
-<br>
-<div style="text-align: center;">
-    <h1>Welcome {{ user.first_name }} to the Injury Report Portal</h1> 
-  </div>
+<br />
+<br />
+<div style="text-align: center">
+  <h1>Welcome {{ user.first_name }} to the Injury Report Portal</h1>
+</div>
 
-  <div style="text-align: center;">
-    <h1>Report your injury</h1> 
-    <ul class="list-group list-group-flush" id="notes">
-        {% for note in user.notes %}
-        <li class="list-group-item" style="color: black;">{{ note.data }}, {{ note.date.strftime("%B %d, %Y %I:%M %p") }}
-            <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </li>
-        {% endfor %}
-    </ul>
-  </div>
+<div style="text-align: center">
+  <h1>Report your injury</h1>
+  <ul class="list-group list-group-flush" id="notes">
+    {% for note in user.notes %}
+    <li class="list-group-item" style="color: black">
+      {{ note.data }}, {{ note.date.strftime("%B %d, %Y %I:%M %p") }}
+      <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
 
-  <div style="text-align: center;">
-    <form method="POST">
-        <textarea name="note" id="note" class="form-control"></textarea>
-        <br>
-        <div align="center">
-            <button type="submit" class="btn btn-primary">Add Note</button>
-        </div>
-    </form>
-  </div>
+<div style="text-align: center">
+  <form method="POST">
+    <textarea name="note" id="note" class="form-control"></textarea>
+    <br />
+    <div align="center">
+      <button type="submit" class="btn btn-primary">Add Note</button>
+    </div>
+  </form>
+</div>
 
 {% endblock %}
