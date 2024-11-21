@@ -7,6 +7,8 @@ class Note(db.Model): #defines layout for objects
     data = db.Column(db.String(10000)) #the note itself
     date = db.Column(db.DateTime(timezone=True), default=func.now()) #date and time of note 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id')) #references an ID to a column of a different database
+    trainer_assigned = db.Column(db.String(10000), default="none") # the trainer assigned to this injury
+    status = db.Column(db.String(10000), default="waiting") # accepted, waiting, or cleared
 
 class User(db.Model, UserMixin): #defines layout for objects
     id = db.Column(db.Integer, primary_key=True) #unique identifier that represents object
