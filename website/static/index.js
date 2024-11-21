@@ -1,4 +1,4 @@
-function deleteNote(noteId) {
+function deleteNote(noteId, role) {
     fetch("/delete-note", {
         method: "POST",
         headers: {
@@ -6,6 +6,10 @@ function deleteNote(noteId) {
         },
         body: JSON.stringify({ noteId: noteId }),
     }).then((_res) => {
-        window.location.href = "/";
+        if (role == "trainer") {
+            window.location.href = "/trainerHome";
+        } else {
+            window.location.href = "/";
+        }
     });
 }
