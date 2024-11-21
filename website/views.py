@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import Note
+from .models import Note, User
 from . import db
 import json
 import pytz
@@ -42,6 +42,8 @@ def home():
 @login_required
 def trainerHome():
     notes = Note.query.all()
+    users = User.query.all()
+    user_dict = {user.id: user.first_name + " " + user.last_name for user in users}
     est = pytz.timezone('US/Eastern')
 
     current_time = datetime.now()
@@ -63,7 +65,7 @@ def trainerHome():
         notes_with_diff[note] = [days, hours, minutes]
 
 
-    return render_template("trainerHome.html", user=current_user, notes=notes, diffs=notes_with_diff) #renders the html inside of trainerHome.html
+    return render_template("trainerHome.html", user=current_user, notes=notes, diffs=notes_with_diff, user_dict = user_dict) #renders the html inside of trainerHome.html
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():
