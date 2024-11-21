@@ -86,7 +86,7 @@ def trainer_accept():
     note = Note.query.get(noteId)
     if note:
         if current_user.role == "trainer":
-            note.trainer_assigned = current_user.first_name + current_user.last_name
+            note.trainer_assigned = current_user.first_name + " " + current_user.last_name
             note.status = "accepted"
             db.session.commit()
             
