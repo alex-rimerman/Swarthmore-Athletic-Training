@@ -4,7 +4,7 @@ from .models import Note
 from . import db
 import json
 import pytz
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 # define a blueprint for views
@@ -43,13 +43,27 @@ def home():
 def trainerHome():
     notes = Note.query.all()
     est = pytz.timezone('US/Eastern')
+
+    current_time = datetime.now()
+    current_time = pytz.utc.localize(current_time)
+    time_plus_5_hours = timedelta(hours=5)
+    notes_with_diff = {}
+
     for note in notes:
         if note.date.tzinfo is None:
             # Make the datetime object timezone-aware
             note.date = pytz.utc.localize(note.date)
         # Convert to EST
         note.date = note.date.astimezone(est)
-    return render_template("trainerHome.html", user=current_user, notes=notes) #renders the html inside of trainerHome.html
+
+        time_diff = current_time - note.date + time_plus_5_hours
+        days = time_diff.days
+        hours = time_diff.seconds // 3600
+        minutes = (time_diff.seconds % 3600) // 60
+        notes_with_diff[note] = [days, hours, minutes]
+
+
+    return render_template("trainerHome.html", user=current_user, notes=notes, diffs=notes_with_diff) #renders the html inside of trainerHome.html
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():
