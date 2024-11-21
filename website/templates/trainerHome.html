@@ -19,14 +19,23 @@ content %}
     <li class="list-group-item" style="color: black">
       {{ note.data }}, {{ note.date.strftime("%B %d, %Y %I:%M %p") }} {{
       diffs[note][0] }} days, {{ diffs[note][1] }} hours, and {{ diffs[note][2]
-      }} minutes ago , Athlete: {{ user_dict[note.user_id]}}
-      <button
-        type="button"
-        class="close"
-        onClick="deleteNote('{{ note.id }}', '{{ user.role }}')"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
+      }} minutes ago , Athlete: {{ user_dict[note.user_id]}} 
+      
+      {% if (note.trainer_assigned == "waiting") %}
+        <button
+          type="button"
+          class="btn btn-success"
+          onClick="trainerAccept('{{ note.id }}')">
+          <span aria-hidden="true">&#10003;</span>
+        </button>
+      {% else %}
+        <button
+          type="button"
+          class="btn btn-danger"
+          onClick="deleteNote('{{ note.id }}', '{{ user.role }}')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      {% endif %}
     </li>
     {% endfor %}
   </ul>
